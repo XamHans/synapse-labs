@@ -1,5 +1,4 @@
 {
-  "python.defaultInterpreterPath": "./.venv/bin/python",
   "python.terminal.activateEnvInSelectedTerminal": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "charliermarsh.ruff",
