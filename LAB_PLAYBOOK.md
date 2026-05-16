@@ -1,10 +1,10 @@
-# 📓 Synapse Lab Playbook
+# 📓 Synapse Lab Playbook: The "Red Thread" Narrative
 
 ## Why this playbook exists
 
 Labs are where the "AI Native Engineer" title is earned. While the Synapse app teaches the concept, the lab proves the concept can be used to solve a real-world engineering problem. 
 
-Modules drift in quality when labs are just "chat demos." The reader feels it: some labs feel like homework, others feel like a breakthrough. This document ensures every lab is a breakthrough by applying the same rigorous pipeline we use for our core content.
+Modules drift in quality when labs are just "chat demos." This document ensures every lab is a **breakthrough** by applying the **Red Thread** narrative: moving from a naive failure to a deterministic software solution.
 
 ---
 
@@ -18,7 +18,7 @@ brief.md   ┘                  │
                    Stage 2: Ground the Scenario
                               │
                               ▼
-                   Stage 3: The Dependency Chain
+                   Stage 3: The Red Thread (The Flow)
                               │
                               ▼
                    Stage 4: Draft with SUCCESs
@@ -36,67 +36,66 @@ brief.md   ┘                  │
 
 Before you open a Jupyter Notebook, you must name the specific concepts the user will master.
 
-| Field | What it is | Example |
-|---|---|---|
-| **Primary Concept** | The single noun phrase naming the *engineering mechanism* being taught. | _Deterministic JSON fallback boundaries_ |
-| **Secondary Concepts** | (Optional) Related concepts that support or build upon the primary one. | _Latent cost instrumentation_ |
-
-### Rules for chaining concepts
-- **Build, don't just stack.** If a lab has two concepts (e.g., Latency measurement and JSON parsing), they must relate. *Example:* "Latency measurement proves the model is slow (Concept A), which motivates why we need a fast, deterministic fallback when the model fails (Concept B)."
-- **Identify the Artifact.** Pin the concept to a specific code artifact the user will manipulate (e.g., `client.chat.completions`, `json.loads()`, `tiktoken.get_encoding`).
+- **Primary Concept:** The single noun phrase naming the *engineering mechanism* being taught. (e.g., _Constrained Decoding_).
+- **Secondary Concepts:** Related concepts that support it (e.g., _Latency/Cost instrumentation_).
+- **The Evolution:** Identify the "Old Way" (brittle) vs. the "AI-Native Way" (guaranteed).
 
 ---
 
 ## Stage 2: Ground the Scenario
 
-Every lab must be grounded in a realistic, non-generic engineering task. 
+Every lab must be grounded in a realistic engineering task. 
 
-- **No Generic "Chat Bots."** Instead of "Building a chatbot," build "A high-throughput support router for a billing system."
-- **Real Constraints.** Use real numbers for grounding:
-    - *Latency:* "gpt-4o is too slow for our 200ms SLA—measure it."
-    - *Cost:* "We have 10,000 tickets per day; calculate the daily burn."
-    - *Failure:* "The model returned 'Sure, here is your JSON' inside the block—write the regex that fixes it."
+- **The Assignment:** "You have been assigned to build a [System Name]. Your goal is to [Specific Action]."
+- **Real Constraints:** Use real numbers for grounding (e.g., "We have 10,000 requests/day, we can't afford retries").
+- **The Failure Mode:** Identify why a simple API call isn't enough (e.g., "The model is chatty and includes filler text that crashes `json.loads()`").
 
 ---
 
-## Stage 3: The Dependency Chain (Notebook Flow)
+## Stage 3: The Red Thread (Notebook Flow)
 
-Concepts are sequenced so each one answers an implicit tension the previous one opened.
+Every notebook must follow this exact four-part narrative:
 
-- **Part 1: The Tension (The Broken State).** 
-    - Demonstrate why a naive approach fails. 
-    - *Example:* Run an LLM call that returns malformed JSON, causing a `ValueError` in Python. 
-    - The user must *feel* the fragility before they fix it.
-- **Part 2: The Challenge (The Implementation).**
-    - The user writes the logic to resolve the tension.
-    - Provide a skeleton function with `# --- YOUR CODE HERE ---`.
-- **Part 3: The Scorecard (Validation).**
-    - End every lab with a **Scorecard**. 
-    - It must test the implementation against multiple edge cases (Happy Path, Hallucination, Malformed Input).
-    - Verification is deterministic, not probabilistic.
+### Part 1: The Naive Approach (Tension)
+- **Action:** Provide a simple, pre-written function that calls the LLM.
+- **The Lesson:** Instrument the call. Show the **latency** and **cost**. 
+- **The Narrative:** "It's slow and expensive. We can't afford to retry if it fails."
+
+### Part 2: The Real-World Crash (The Problem)
+- **Action:** Run the naive code on a "chatty" input that includes Markdown backticks or conversational filler.
+- **The Result:** Let the user see a loud `JSONDecodeError` (or similar).
+- **The Narrative:** "Models love to talk. In production, 'chatty' responses will crash your server. We need a boundary."
+
+### Part 3: The Brittle Boundary (The Challenge)
+- **Action:** Ask the user to solve it the "hard way" using Python logic and **Regex**.
+- **Hint:** Provide a hint like `re.search(r"(\{.*\})", text, re.DOTALL)`.
+- **Goal:** Build empathy for the problem and understand how engineers solved this before modern features existed.
+
+### Part 4: The AI-Native Solution (The Breakthrough)
+- **Action:** Introduce a modern, built-in tool (e.g., Structured Outputs, Function Calling).
+- **Research Step:** Tell the user: *"The industry moves fast. Use Google/WebSearch to find the latest syntax for [Feature Name] in the [Library] SDK."*
+- **Final Challenge:** Apply the modern tool to the same problem. Show how it replaces 20 lines of brittle Regex with 3 lines of guaranteed schema adherence.
 
 ---
 
 ## Stage 4: Draft with SUCCESs
 
-Apply the SUCCESs framework to your notebook cells:
-
-- **Simple:** The lab focuses on the concept. Avoid 50-line boilerplate functions that have nothing to do with the AI primitive.
-- **Unexpected:** Use the tension phase to show a failure mode the user might not have anticipated (e.g., "AI filler text" breaking `json.loads`).
-- **Concrete:** Load-bearing nouns are code variables and API payloads. Use real strings, real error messages, and real performance metrics.
-- **Stories:** The notebook should feel like a debugging journey. Each cell should lead logically to the next.
+- **Simple:** Avoid 50-line boilerplate functions. The code should be about the AI primitive.
+- **Unexpected:** The "Crash" in Part 2 should be a genuine "Aha!" moment.
+- **Concrete:** Use real strings, real error messages, and real performance metrics.
+- **Stories:** The notebook is a debugging journey. Each cell leads inevitably to the next.
 
 ---
 
 ## Stage 5: Self-review checklist
 
-- [ ] Concept names are written as noun phrases, not headlines.
-- [ ] If multiple concepts exist, they form a logical dependency chain.
-- [ ] The "Tension" phase clearly demonstrates a failure before the "Challenge" begins.
-- [ ] The scenario uses grounded, realistic constraints (latency, cost, or specific failure modes).
-- [ ] The Scorecard tests at least 3 distinct scenarios, including one edge case.
-- [ ] No "in this lab"-style throat-clearing. Start with the tension.
-- [ ] Code is formatted with clear docstrings and `# --- YOUR CODE HERE ---` markers.
+- [ ] Does the lab have a clear "Assignment" (e.g., "Build a Support Router")?
+- [ ] Does Part 1 show latency/cost to justify why we can't just "retry"?
+- [ ] Does Part 2 demonstrate a specific, realistic failure (like "chatty filler")?
+- [ ] Does Part 3 force the user to build a manual "Boundary" (Regex/Try-Except)?
+- [ ] Does Part 4 introduce a modern "AI-Native" tool that makes the boundary redundant?
+- [ ] Is there a research step using WebSearch to find the latest SDK syntax?
+- [ ] Does the Scorecard test at least 3 distinct scenarios, including an edge case?
 
 ---
 
@@ -106,3 +105,4 @@ Always use the Nix-provided environment:
 - `tiktoken` (Token counting)
 - `qrcode` / `pillow` (Handoff)
 - `python-dotenv` (Local .env handling)
+- `pydantic` (Structured Outputs)
