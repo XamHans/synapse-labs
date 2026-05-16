@@ -5,5 +5,11 @@
     "mkhl.direnv",
     "charliermarsh.ruff",
     "usernamehw.errorlens"
+  ],
+  "unwantedRecommendations": [
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.azure-account",
+    "msjsdiag.debugger-for-edge",
+    "firefox-devtools.vscode-firefox-debug"
   ]
 }
