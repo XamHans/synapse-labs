@@ -43,9 +43,3 @@ We provide a one-click setup script for macOS and Linux:
     ```bash
     jupyter notebook
     ```
-
-## 🧪 About Synapse
-
-Synapse is an AI-native learning platform designed specifically for software engineers. We don't teach you how to build models from scratch; we teach you how to build robust, production-ready applications _using_ models.
-
-Visit [ai-in-a-shell.com](https://ai-in-a-shell.com) to start the full curriculum.

@@ -20,6 +20,8 @@
           matplotlib
           requests
           python-dotenv
+          qrcode
+          pillow
         ]);
       in
       {
