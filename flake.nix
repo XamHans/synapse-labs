@@ -29,6 +29,7 @@
           buildInputs = [
             pythonWithPackages
             pkgs.gh # GitHub CLI for repo management
+            pkgs.nbstripout # Keep notebooks clean
           ];
 
           shellHook = ''
@@ -40,6 +41,14 @@
             if [ ! -f .env ]; then
               echo "OPENAI_API_KEY=" > .env
               echo "⚠️  Created a blank .env file. Add your OpenAI API Key there."
+            fi
+
+            # Check if nbstripout is initialized for git
+            if command -v nbstripout >/dev/null 2>&1; then
+              if ! git config --get filter.nbstripout.clean >/dev/null 2>&1; then
+                echo "🧹 Initializing nbstripout for clean git commits..."
+                nbstripout --install
+              fi
             fi
           '';
         };
