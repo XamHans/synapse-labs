@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-toolsai.jupyter",
+    "mkhl.direnv",
+    "charliermarsh.ruff",
+    "usernamehw.errorlens"
+  ]
+}
