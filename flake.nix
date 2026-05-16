@@ -1,5 +1,5 @@
 {
-  description: "Synapse AI Engineering Labs - Reproducible Development Environment";
+  description = "Synapse AI Engineering Labs - Reproducible Development Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
