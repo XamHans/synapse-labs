@@ -10,6 +10,10 @@ These labs are part of the core curriculum at [AI in a Shell](https://ai-in-a-sh
 
 - **[01-mindset-challenge.ipynb](./ai-native-engineer/01-ai-engineering-mental-models/01-mindset-challenge.ipynb):** Bridge the gap between probabilistic models and deterministic code. Learn to measure latency, calculate cost, and build defensive boundaries for AI components.
 
+### Phase 2: Embeddings & Semantic Search
+
+- **[03-semantic-search-lab.ipynb](./ai-native-engineer/04-embeddings-semantic-search/03-semantic-search-lab.ipynb):** Move from "vibe-based" search to instrumented retrieval. Learn to build a diagnostic eval table, identify failure shapes like "Wrong Subset," and apply foundational fix layers like metadata filtering.
+
 ## 🛠️ How to use these labs
 
 ### 1. Browser (Recommended for Beginners)
