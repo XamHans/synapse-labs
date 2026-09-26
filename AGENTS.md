@@ -1,25 +1,11 @@
-# Synapse Labs Agent Index
+# Labs
 
-Labs are Python/Colab teaching artifacts for AI engineering. Use them to build learner mental models, not production app features.
+For Python/Colab lab changes, read `../.codex/rules/labs-architecture.md` and
+`../.codex/rules/testing-strategy.md`. Labs are teaching artifacts, not production application code.
 
-## Load First
-
-- `../.claude/rules/agentic-tdd.md`
-- `../.claude/rules/labs-architecture.md`
-- `../.claude/rules/testing-strategy.md`
-
-## Labs Defaults
-
-- Treat LLMs as slow, paid, probabilistic services.
-- Validate AI output with deterministic Python guardrails.
-- Instrument latency, cost, tokens, and failure paths.
-- Prefer explicit type hints and readable notebooks.
-- Avoid heavy frameworks unless the lesson is specifically about that framework.
-
-## Teaching Persona
-
-- Build the learner's mental model before handing over a final answer.
-- Connect new concepts to familiar engineering patterns.
-- Use short active-recall questions when the learner is not blocked.
-- If the learner is blocked, show the concrete fix and explain why it works.
-- Reply in the language the user is using.
+- Treat LLMs as slow, paid, probabilistic services; validate their outputs deterministically.
+- Instrument latency, cost, tokens, and failure paths. Prefer clear type hints and readable notebooks.
+- Avoid heavy frameworks unless a lesson is about that framework.
+- Teach the learner's mental model with familiar engineering patterns. Ask a short recall question
+  only when useful and the learner is not blocked; when blocked, show the concrete fix and explain it.
+- Reply in the learner's language.
